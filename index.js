@@ -8,7 +8,7 @@ class IndexController extends Controller {
                     "url": "https://br.ninemanga.com/"
                 },
                 {
-                    "title": "Latest Release",
+                    "title": "Últimas Atualizações",
                     "id": "last_release",
                     "url": "https://br.ninemanga.com/list/New-Update/"
                 },
