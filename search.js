@@ -1,5 +1,5 @@
 const supportLanguages = require('./support_languages');
-const baseURL = 'https://{0}.ninemanga.com/search/?wd={1}';
+const baseURL = 'https://br.ninemanga.com/search/?wd={1}';
 
 class SearchController extends Controller {
 
