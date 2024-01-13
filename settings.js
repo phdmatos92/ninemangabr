@@ -6,8 +6,8 @@ class SettingsController extends glib.Collection {
         if (typeof(glib.Collection.getLanguage) === 'function') {
             lang = glib.Collection.getLanguage();
             let arr = lang.split('-');
-            if (['en', 'es', 'ru', 'de', 'it', 'fr', 'pt'].indexOf(arr[0]) < 0) {
-                lang = 'en';
+            if (['en', 'es', 'ru', 'de', 'it', 'fr', 'br'].indexOf(arr[0]) < 0) {
+                lang = 'br';
             }
         }
         this.setData([
@@ -38,7 +38,7 @@ class SettingsController extends glib.Collection {
                     value: 'it'
                 }, {
                     name: 'Brasil',
-                    value: 'pt'
+                    value: 'br'
                 }, {
                     name: 'Français',
                     value: 'fr'
