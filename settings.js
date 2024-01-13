@@ -21,7 +21,7 @@ class SettingsController extends Controller {
                 return name;
             }
         }
-        return 'en';
+        return 'br';
     }
 
     onPressed(lan) {
