@@ -1,53 +1,48 @@
+const supportLanguages = require('./supoort_languages');
 
+class SettingsController extends Controller {
 
-class SettingsController extends glib.Collection {
-    reload(data, cb) {
-        let lang = 'en';
-        if (typeof(glib.Collection.getLanguage) === 'function') {
-            lang = glib.Collection.getLanguage();
-            let arr = lang.split('-');
-            if (['en', 'es', 'ru', 'de', 'it', 'fr', 'br'].indexOf(arr[0]) < 0) {
-                lang = 'br';
+    load() {
+        this.data = {
+            languages: supportLanguages,
+            map: {
+                'en': 'English',
+                'es': 'Español',
+                'ru': 'русский',
+                'de': 'Deutsch',
+                'it': 'Italiano',
+                'br': 'Brasil',
+                'fr': 'Français'
+            },
+            current: this.getLanguage(),
+        };
+    }
+
+    getLanguage() {
+        let lan = localStorage['cached_language'];
+        if (lan) return lan;
+
+        for (let name of supportLanguages) {
+            if (navigator.language.startsWith(name)) {
+                return name;
             }
         }
-        this.setData([
-            glib.SettingItem.new(
-                glib.SettingItem.Type.Header,
-                "general",
-                "General"
-            ),
-            glib.SettingItem.new(
-                glib.SettingItem.Type.Options,
-                "language",
-                "Language",
-                lang,
-                [{
-                    name: 'English',
-                    value: 'en'
-                }, {
-                    name: 'Español',
-                    value: 'es'
-                }, {
-                    name: 'русский',
-                    value: 'ru'
-                }, {
-                    name: 'Deutsch',
-                    value: 'de'
-                }, {
-                    name: 'Italiano',
-                    value: 'it'
-                }, {
-                    name: 'Brasil',
-                    value: 'br'
-                }, {
-                    name: 'Français',
-                    value: 'fr'
-                }]
-            ),
-        ]);
+        return 'en';
+    }
+
+    onPressed(lan) {
+        this.setState(() => {
+            this.data.current = lan;
+            localStorage['cached_language'] = lan;
+            console.log(`Set language ${lan}`);
+        });
+        localStorage.removeItem('cache_home');
+        localStorage.removeItem('cache_last_release');
+        localStorage.removeItem('cache_manga_directory');
+        localStorage.removeItem('cache_hot_manga');
+        localStorage.removeItem('cache_new_manga');
+        NotificationCenter.trigger("reload", null);
     }
 }
 
-module.exports = function() {
-    return SettingsController.new();
-}
+module.exports = SettingsController;
