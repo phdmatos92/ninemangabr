@@ -6,13 +6,7 @@ class SettingsController extends Controller {
         this.data = {
             languages: supportLanguages,
             map: {
-                'en': 'English',
-                'es': 'Español',
-                'ru': 'русский',
-                'de': 'Deutsch',
-                'it': 'Italiano',
-                'br': 'Brasil',
-                'fr': 'Français'
+                'br': 'Brasil'
             },
             current: this.getLanguage(),
         };
